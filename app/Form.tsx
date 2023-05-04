@@ -12,13 +12,12 @@ function Form() {
 
     const formHandler = async (data: any) => {
         console.log(data);
-        await fetch("/api/formHandler", {
+        const res = await fetch("/api/formHandler", {
             method: "POST",
             body: JSON.stringify(data)
         });
-
+        console.log('Response',res);
     }
-
 
     return (
         <>
@@ -27,22 +26,24 @@ function Form() {
                 <form className='flex space-x-10' onSubmit={handleSubmit(formHandler)}>
                     <div>
                         <label>Email:</label>
-                        <input type="email"
+                        <input
+                            type="email"
                             placeholder='Enter Your Email'
                             {...register("email", {
                                 required: true
                             })}
-                            className='border' />
+                            className='border'
+                        />
                     </div>
                     <div>
                         <label>Password:</label>
                         <input
                             type="password"
                             placeholder='Enter Your Password'
-                            className='border'
                             {...register("password", {
                                 required: true
                             })}
+                            className='border'
                         />
                     </div>
                     <div>
@@ -50,8 +51,6 @@ function Form() {
                     </div>
                 </form>
             </div>
-
-
         </>
     )
 }
